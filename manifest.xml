@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TaskPaneApp">
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xsi:type="TaskPaneApp">
  <Id>d2707750-ddae-4aad-b129-cc9f03f386ac</Id>
- <Version>1.1.0.0</Version><ProviderName>Respiratory Quality Tools</ProviderName><DefaultLocale>zh-TW</DefaultLocale>
- <DisplayName DefaultValue="轉出狀況大字選擇"/><Description DefaultValue="ICU、RCC、WARD 轉出狀況大字選擇框，選完填入完整文字。"/>
+ <Version>3.0.0.0</Version><ProviderName>Respiratory Quality Tools</ProviderName><DefaultLocale>zh-TW</DefaultLocale>
+ <DisplayName DefaultValue="轉出狀況大字選擇"/><Description DefaultValue="背景偵測 O 欄選取；側邊欄收起後仍可跳出選擇框。"/>
  <IconUrl DefaultValue="https://jessel1224.github.io/excel-transfer-picker/icon.png"/><SupportUrl DefaultValue="https://jessel1224.github.io/excel-transfer-picker/help.html"/>
  <AppDomains><AppDomain>https://jessel1224.github.io</AppDomain></AppDomains>
  <Hosts><Host Name="Workbook"/></Hosts>
- <Requirements><Sets DefaultMinVersion="1.7"><Set Name="ExcelApi"/></Sets></Requirements>
- <DefaultSettings><SourceLocation DefaultValue="https://jessel1224.github.io/excel-transfer-picker/taskpane.html"/></DefaultSettings>
+ <Requirements><Sets DefaultMinVersion="1.1"><Set Name="SharedRuntime" MinVersion="1.1"/><Set Name="ExcelApi" MinVersion="1.7"/></Sets></Requirements>
+ <DefaultSettings><SourceLocation DefaultValue="https://jessel1224.github.io/excel-transfer-picker/background-v3.html"/></DefaultSettings>
  <Permissions>ReadWriteDocument</Permissions>
+ <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+  <Requirements><bt:Sets DefaultMinVersion="1.1"><bt:Set Name="SharedRuntime" MinVersion="1.1"/></bt:Sets></Requirements>
+  <Hosts><Host xsi:type="Workbook">
+   <Runtimes><Runtime resid="Background.Url" lifetime="long"/></Runtimes>
+   <DesktopFormFactor>
+    <FunctionFile resid="Background.Url"/>
+    <ExtensionPoint xsi:type="PrimaryCommandSurface"><OfficeTab id="TabHome"><Group id="Picker.Group">
+     <Label resid="Group.Label"/>
+     <Icon><bt:Image size="16" resid="Icon.Url"/><bt:Image size="32" resid="Icon.Url"/><bt:Image size="80" resid="Icon.Url"/></Icon>
+     <Control xsi:type="Button" id="Picker.Enable"><Label resid="Enable.Label"/><Supertip><Title resid="Enable.Label"/><Description resid="Enable.Desc"/></Supertip><Icon><bt:Image size="16" resid="Icon.Url"/><bt:Image size="32" resid="Icon.Url"/><bt:Image size="80" resid="Icon.Url"/></Icon><Action xsi:type="ExecuteFunction"><FunctionName>enablePicker</FunctionName></Action></Control>
+     <Control xsi:type="Button" id="Picker.Stop"><Label resid="Stop.Label"/><Supertip><Title resid="Stop.Label"/><Description resid="Stop.Desc"/></Supertip><Icon><bt:Image size="16" resid="Icon.Url"/><bt:Image size="32" resid="Icon.Url"/><bt:Image size="80" resid="Icon.Url"/></Icon><Action xsi:type="ExecuteFunction"><FunctionName>stopPicker</FunctionName></Action></Control>
+     <Control xsi:type="Button" id="Picker.Reopen"><Label resid="Reopen.Label"/><Supertip><Title resid="Reopen.Label"/><Description resid="Reopen.Desc"/></Supertip><Icon><bt:Image size="16" resid="Icon.Url"/><bt:Image size="32" resid="Icon.Url"/><bt:Image size="80" resid="Icon.Url"/></Icon><Action xsi:type="ExecuteFunction"><FunctionName>reopenPicker</FunctionName></Action></Control>
+     <Control xsi:type="Button" id="Picker.Settings"><Label resid="Settings.Label"/><Supertip><Title resid="Settings.Label"/><Description resid="Settings.Desc"/></Supertip><Icon><bt:Image size="16" resid="Icon.Url"/><bt:Image size="32" resid="Icon.Url"/><bt:Image size="80" resid="Icon.Url"/></Icon><Action xsi:type="ShowTaskpane"><SourceLocation resid="Background.Url"/></Action></Control>
+    </Group></OfficeTab></ExtensionPoint>
+   </DesktopFormFactor>
+  </Host></Hosts>
+  <Resources>
+   <bt:Images><bt:Image id="Icon.Url" DefaultValue="https://jessel1224.github.io/excel-transfer-picker/icon.png"/></bt:Images>
+   <bt:Urls><bt:Url id="Background.Url" DefaultValue="https://jessel1224.github.io/excel-transfer-picker/background-v3.html"/></bt:Urls>
+   <bt:ShortStrings><bt:String id="Group.Label" DefaultValue="轉出狀況"/><bt:String id="Enable.Label" DefaultValue="啟用自動跳框"/><bt:String id="Stop.Label" DefaultValue="停用自動跳框"/><bt:String id="Reopen.Label" DefaultValue="重開選擇框"/><bt:String id="Settings.Label" DefaultValue="查看設定"/></bt:ShortStrings>
+   <bt:LongStrings><bt:String id="Enable.Desc" DefaultValue="啟用背景偵測，並設定此活頁簿下次開啟時自動載入。"/><bt:String id="Stop.Desc" DefaultValue="停止自動跳框，並取消此活頁簿下次開啟時自動載入。"/><bt:String id="Reopen.Desc" DefaultValue="針對目前選取的 O 欄單一儲存格重新開啟選擇框。"/><bt:String id="Settings.Desc" DefaultValue="只在需要時顯示設定與最後操作結果。"/></bt:LongStrings>
+  </Resources>
+ </VersionOverrides>
 </OfficeApp>
